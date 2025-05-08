@@ -12,7 +12,7 @@
 void BubbleSort(int array[], int length)
 {
 	//Variables
-    int temp; //Used to store values as we sort.
+	int temp; //Used to store values as we sort.
 	int swapOccured = 0; //Used to exit the sorting algorithm.
 	
 	//Print the unsorted array.
@@ -30,21 +30,21 @@ void BubbleSort(int array[], int length)
 	for(int i=0; i<(length-1); i++)
 	{
 		//Run through every position in the array.
-        for(int i=0; i<(length-1); i++)
+		for(int i=0; i<(length-1); i++)
 		{
-            //If the value in the current position is greater than the value in the position after it...
+			//If the value in the current position is greater than the value in the position after it...
 			if(array[i] > array[i+1])
 			{
 				//...store the value of the current position.
-                temp = array[i];
+				temp = array[i];
 
-                //Set the value of the current position to the value of the position after it.
+				//Set the value of the current position to the value of the position after it.
 				array[i] = array[i+1];
 
-                //Set the value of the next position to the stored value from the current position.
+				//Set the value of the next position to the stored value from the current position.
 				array[i+1] = temp;
 
-                //A value swap has occured.
+				//A value swap has occured.
 				swapOccured = 1;
 			}
 		}
@@ -55,8 +55,8 @@ void BubbleSort(int array[], int length)
 			break;
 		}
 
-        //Reset the exit variable.
-        swapOccured = 0;
+		//Reset the exit variable.
+		swapOccured = 0;
 		
 		//Print this round of sorting.
 		printf("\nPass %d Result:\t", i+1);
@@ -115,12 +115,12 @@ int main()
 
 	printf("\n_____________________________________________________________________");
 
-    //Wait one second after displaying the randomly generated list of numbers.
-    //(I think it looks nicer to pause between displaying these two sections to more clearly differentiate what is occuring.)
-    sleep(1);
+	//Wait one second after displaying the randomly generated list of numbers.
+	//(I think it looks nicer to pause between displaying these two sections to more clearly differentiate what is occuring.)
+	sleep(1);
 	
 	//Call BubbleSort Method
-    //(This will display the sorting results.)
+	//(This will display the sorting results.)
 	BubbleSort(array, length);
 
 	printf("\n_____________________________________________________________________\n\n\n");
