@@ -9,14 +9,13 @@
 #include <unistd.h> //For "sleep(1);"
 
 //BubbleSort Method
-void BubbleSort(int array[], int length)
+void BubbleSort(int array[], int length, int temp)
 {
 	//Variables
-	int temp; //Used to store values as we sort.
 	int swapOccured = 0; //Used to exit the sorting algorithm.
 	
 	//Print the unsorted array.
-	printf("\n\nUnsorted:\t");
+	printf("\n\tUnsorted:\t");
 	for(int i=0; i<length; i++)
 	{
 		printf("%d", array[i]);
@@ -27,6 +26,7 @@ void BubbleSort(int array[], int length)
 	}
 	
 	//Bubble Sort Algorithm
+	//Run through every position in the array.
 	for(int i=0; i<(length-1); i++)
 	{
 		//Run through every position in the array.
@@ -59,7 +59,7 @@ void BubbleSort(int array[], int length)
 		swapOccured = 0;
 		
 		//Print this round of sorting.
-		printf("\nPass %d Result:\t", i+1);
+		printf("\n\tPass %d Result:\t", i+1);
 		for(int i=0; i<length; i++)
 		{
 			printf("%d", array[i]);
@@ -76,6 +76,71 @@ void BubbleSort(int array[], int length)
 }
 //End BubbleSort Method
 
+//SelectionSort method
+void SelectionSort(int array[], int length, int temp)
+{
+	//Variables
+	int min = 0; //Used to store the location of the smallest found value within the array.
+	
+	//Print the unsorted array.
+	printf("\n\tUnsorted:\t");
+	for(int i=0; i<length; i++)
+	{
+		printf("%d", array[i]);
+		if(i<(length-1))
+		{
+			printf(", ");
+		}
+	}
+	
+	//Selection Sort Algorithm
+	//Run through every position in the array.
+	for(int i=0; i<(length-1); i++)
+	{
+		//Until proven otherwise, we will assume that the current position holds the smallest value within the remainder of the array.
+		min = i;
+
+		//Run through every position in the array, starting from the array position after the current one.
+		for(int b=(i+1); b<length; b++)
+		{
+			//If a value is found that is lesser than the value in the current position...
+			if(array[b] < array[min])
+			{
+				//...save the location of that newfound minimum value.
+				min = b;
+			}
+		}
+
+		//If a smaller value was discovered further down in the array...
+		if(min != i)
+		{
+			//...store the value of the current position.
+			temp = array[i];
+
+			//Set the value of the current position to the value of minimum discovered value.
+			array[i] = array[min];
+
+			//Set the value of the position which contains the minimum discovered value to the value which was previously stored in the current position.
+			array[min] = temp;
+		}
+		
+		//Print this round of sorting.
+		printf("\n\tPass %d Result:\t", i+1);
+		for(int i=0; i<length; i++)
+		{
+			printf("%d", array[i]);
+			if(i<(length-1))
+			{
+				printf(", ");
+			}
+		}
+	}
+
+	//The array is sorted.
+	printf(" (Sorted!)\n");
+}
+//End SelectionSort method
+
 //Main Method
 int main()
 {
@@ -83,6 +148,8 @@ int main()
 	int length = 0; //Array Length
 	int number = 0; //Stored Number Values
 	int array[100]; //Points To Array Locations
+	int arraya[100]; //Duplicate Array for SelectionSort Method (Arrays cannot be passed by value in C.)
+	int temp; //Used to store values as we sort.
 	
 	//Generate Random Number Seed
 	srand(time(NULL));
@@ -90,16 +157,19 @@ int main()
 	//Welcome Prompt
 	printf("\n_____________________________________________________________________");
 	printf("\nRika Patterson\nSorting Program\n\n");
-	printf("- - - - - - - - - - - - - - - - - - - - - - - - - -");
-	printf("\nThis program generates a random list of numbers\nand then sorts them using a bubble sort algorithm.\n");
-	printf("- - - - - - - - - - - - - - - - - - - - - - - - - -\n\nHow many numbers would you like to sort?: ");
+	printf("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+	printf("\nThis program generates a random list of numbers and then sorts\nthem using a \"bubble sort\" algorithm and a \"selection sort\" algorithm.\n");
+	printf("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\nHow many numbers would you like to sort?: ");
 	scanf("%d", &length); //User-Defined Array Length
 
 	//Generate Random Numbers
 	for (int i=0; i<length; i++) //Run through every position in the array.
 	{
 		number = rand() % 100; //Generate a number between 0 and 99.
-		array[i] = number;     //Assign the current location in the array to this number.
+		
+		//Assign the current location in the array to this number.
+		array[i] = number;
+		arraya[i] = number;
 	}
 	
 	//Print the unsorted array.
@@ -120,8 +190,12 @@ int main()
 	sleep(1);
 	
 	//Call BubbleSort Method
-	//(This will display the sorting results.)
-	BubbleSort(array, length);
+	printf("\n\nBubbleSort");
+	BubbleSort(array, length, temp);
+	
+	//Call SelectionSort Method
+	printf("\n\nSelectionSort");
+	SelectionSort(arraya, length, temp);
 
 	printf("\n_____________________________________________________________________\n\n\n");
 	
