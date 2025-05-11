@@ -16,9 +16,19 @@ void BubbleSort(int array[], int length, int temp)
 	
 	//Print the unsorted array.
 	printf("\n\tUnsorted:\t");
+	//Run through every position in the array.
 	for(int i=0; i<length; i++)
 	{
+		//Add an extra leading space character when displaying a single-digit number. This keeps the columns even.
+		if(array[i] < 10)
+		{
+			printf(" ");
+		}
+
+		//Display the number.
 		printf("%d", array[i]);
+
+		//Add a comma and space character if this isn't the last digit in the array.
 		if(i<(length-1))
 		{
 			printf(", ");
@@ -60,9 +70,19 @@ void BubbleSort(int array[], int length, int temp)
 		
 		//Print this round of sorting.
 		printf("\n\tPass %d Result:\t", i+1);
+		//Run through every position in the array.
 		for(int i=0; i<length; i++)
 		{
+			//Add an extra leading space character when displaying a single-digit number. This keeps the columns even.
+			if(array[i] < 10)
+			{
+				printf(" ");
+			}
+
+			//Display the number.
 			printf("%d", array[i]);
+
+			//Add a comma and space character if this isn't the last digit in the array.
 			if(i<(length-1))
 			{
 				printf(", ");
@@ -84,14 +104,27 @@ void SelectionSort(int array[], int length, int temp)
 	
 	//Print the unsorted array.
 	printf("\n\tUnsorted:\t");
+	//Run through every position in the array.
 	for(int i=0; i<length; i++)
 	{
+		//Add an extra leading space character when displaying a single-digit number. This keeps the columns even.
+		if(array[i] < 10)
+		{
+			printf(" ");
+		}
+
+		//Display the number.
 		printf("%d", array[i]);
+
+		//Add a comma and space character if this isn't the last digit in the array.
 		if(i<(length-1))
 		{
 			printf(", ");
 		}
 	}
+
+	//Place a graphic under the number which is currently being sorted. This graphic begins under the first number in the array and will be labeled during the following for-loop.
+	printf("\n\t         \t ⮤");
 	
 	//Selection Sort Algorithm
 	//Run through every position in the array.
@@ -122,22 +155,64 @@ void SelectionSort(int array[], int length, int temp)
 
 			//Set the value of the position which contains the minimum discovered value to the value which was previously stored in the current position.
 			array[min] = temp;
+			
+			//Display the minimum discovered value underneath the current position to convey which numbers are being swapped.
+			printf(" %d", array[i]);
+		}
+		//If a smaller value was NOT discovered during this pass...
+		else
+		{
+			//...the graphic underneath the current position will state so.
+			printf(" No Swap");
 		}
 		
 		//Print this round of sorting.
 		printf("\n\tPass %d Result:\t", i+1);
+
+		//Run through every position in the array.
 		for(int i=0; i<length; i++)
 		{
+			//Add an extra leading space character when displaying a single-digit number. This keeps the columns even.
+			if(array[i] < 10)
+			{
+				printf(" ");
+			}
+
+			//Display the number.
 			printf("%d", array[i]);
+
+			//Add a comma and space character if this isn't the last digit in the array.
 			if(i<(length-1))
 			{
 				printf(", ");
 			}
 		}
+
+		//If we have reached the final digit in the array...
+		if(i==(length-2))
+		{
+			//...then the array is sorted.
+			printf(" (Sorted!)");
+		}
+		//Otherwise...
+		else
+		{
+			//...on the next line we will be displaying a graphic to depict which numbers have been swapped.
+			//Start with blank space where the row label would be.
+			printf("\n\t         \t     ");
+
+			//Depending how far into the array we currently are (i) we will insert space characters under the digits that have already been sorted.
+			for(int j=0; j<i; j++)
+			{
+				printf("    ");
+			}
+
+			//Place a graphic under the number which is currently being sorted. This graphic will be labeled during the next iteration of this for-loop.
+			printf("⮤");
+		}
+
 	}
 
-	//The array is sorted.
-	printf(" (Sorted!)\n");
 }
 //End SelectionSort method
 
