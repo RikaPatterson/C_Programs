@@ -39,6 +39,11 @@ void BubbleSort(int array[], int length, int temp)
 	//Run through every position in the array.
 	for(int i=0; i<(length-1); i++)
 	{
+
+		//On the next line we will be displaying a graphic to depict which numbers have been moved towards the beginning of the list.
+		//Start with blank space where the row label would be.
+		printf("\n\t         \t     ");
+
 		//Run through every position in the array.
 		for(int i=0; i<(length-1); i++)
 		{
@@ -56,6 +61,15 @@ void BubbleSort(int array[], int length, int temp)
 
 				//A value swap has occured.
 				swapOccured = 1;
+
+				//Place an arrow graphic under the number which is currently being moved towards the beginning of the list.
+				printf("↵   ");
+			}
+			//Otherwise...
+			else
+			{
+				//...insert space characters under the digits that did not move towards the beginning of the list during this pass.
+				printf("    ");
 			}
 		}
 		
@@ -123,7 +137,7 @@ void SelectionSort(int array[], int length, int temp)
 		}
 	}
 
-	//Place a graphic under the number which is currently being sorted. This graphic begins under the first number in the array and will be labeled during the following for-loop.
+	//Place an arrow graphic under the number which is currently being sorted. This graphic begins under the first number in the array and will be labeled during the following for-loop.
 	printf("\n\t         \t ⮤");
 	
 	//Selection Sort Algorithm
@@ -162,7 +176,7 @@ void SelectionSort(int array[], int length, int temp)
 		//If a smaller value was NOT discovered during this pass...
 		else
 		{
-			//...the graphic underneath the current position will state so.
+			//...the arrow graphic underneath the current position will state so.
 			printf(" No Swap");
 		}
 		
@@ -207,7 +221,7 @@ void SelectionSort(int array[], int length, int temp)
 				printf("    ");
 			}
 
-			//Place a graphic under the number which is currently being sorted. This graphic will be labeled during the next iteration of this for-loop.
+			//Place an arrow graphic under the number which is currently being sorted. This graphic will be labeled during the next iteration of this for-loop.
 			printf("⮤");
 		}
 
@@ -223,33 +237,52 @@ int main()
 	int length = 0; //Array Length
 	int number = 0; //Stored Number Values
 	int array[100]; //Points To Array Locations
-	int arraya[100]; //Duplicate Array for SelectionSort Method (Arrays cannot be passed by value in C.)
+	int array2[100]; //Duplicate Array for SelectionSort Method (Arrays cannot be passed by value in C.)
 	int temp; //Used to store values as we sort.
 	
 	//Generate Random Number Seed
 	srand(time(NULL));
 	
 	//Welcome Prompt
-	printf("\n_____________________________________________________________________");
+	printf("\n________________________________________________________________________");
 	printf("\nRika Patterson\nSorting Program\n\n");
 	printf("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
-	printf("\nThis program generates a random list of numbers and then sorts\nthem using a \"bubble sort\" algorithm and a \"selection sort\" algorithm.\n");
-	printf("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\nHow many numbers would you like to sort?: ");
-	scanf("%d", &length); //User-Defined Array Length
+	printf("\nThis program generates a random list of numbers and then sorts\nthem using a \"bubble sort\" algorithm and a \"selection sort\" algorithm.\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\n");
+
+	//We will keep prompting the user to enter a value utill they enter a number between 2 and 99.
+	while(length<=1 || length>99)
+	{
+		//Ask for a value.
+		printf("How many numbers would you like to sort?: ");
+		scanf("%d", &length); //User-Defined Array Length
+
+		//If the user entered an erroneous value...
+		if(length<=1 || length>99)
+		{
+			//...provide a friendly error message.
+			printf("                                          Please enter a number between 2 and 99.\n\n");
+		}
+		//Otherwise...
+		else
+		{
+			//...exit the "while" loop and proceed with the rest of the program.
+			break;
+		}
+	}
 
 	//Generate Random Numbers
-	for (int i=0; i<length; i++) //Run through every position in the array.
+	for(int i=0; i<length; i++) //Run through every position in the array.
 	{
 		number = rand() % 100; //Generate a number between 0 and 99.
 		
 		//Assign the current location in the array to this number.
 		array[i] = number;
-		arraya[i] = number;
+		array2[i] = number;
 	}
 	
 	//Print the unsorted array.
-	printf("\nUnsorted list of numbers: \n");
-	for (int i=0; i<length; i++)
+	printf("\nUnsorted list of numbers: ");
+	for(int i=0; i<length; i++)
 	{
 		printf("%d", array[i]);
 		if(i<(length-1))
@@ -258,21 +291,21 @@ int main()
 		}
 	}
 
-	printf("\n_____________________________________________________________________");
+	printf("\n________________________________________________________________________");
 
 	//Wait one second after displaying the randomly generated list of numbers.
 	//(I think it looks nicer to pause between displaying these two sections to more clearly differentiate what is occuring.)
 	sleep(1);
 	
 	//Call BubbleSort Method
-	printf("\n\nBubbleSort");
+	printf("\n\n\"Bubble Sort\" Algorithm");
 	BubbleSort(array, length, temp);
 	
 	//Call SelectionSort Method
-	printf("\n\nSelectionSort");
-	SelectionSort(arraya, length, temp);
+	printf("\n\n\"Selection Sort\" Algorithm");
+	SelectionSort(array2, length, temp);
 
-	printf("\n_____________________________________________________________________\n\n\n");
+	printf("\n________________________________________________________________________\n\n\n");
 	
 	//Terminate Program
 	return 0;
