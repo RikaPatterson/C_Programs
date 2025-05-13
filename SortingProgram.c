@@ -21,7 +21,7 @@ void BubbleSort(int array[], int length, int temp)
 	for(int i=0; i<length; i++)
 	{
 		//Add an extra leading space character when displaying a single-digit number. This keeps the columns even.
-		if(array[i] < 10)
+		if(array[i]<10)
 		{
 			printf(" ");
 		}
@@ -71,7 +71,7 @@ void BubbleSort(int array[], int length, int temp)
 		for(int i=0; i<(length-1); i++)
 		{
 			//If the value in the current position is greater than the value in the position after it...
-			if(array[i] > array[i+1])
+			if(array[i]>array[i+1])
 			{
 				//...store the value of the current position.
 				temp = array[i];
@@ -99,7 +99,7 @@ void BubbleSort(int array[], int length, int temp)
 		for(int i=0; i<length; i++)
 		{
 			//Add an extra leading space character when displaying a single-digit number. This keeps the columns even.
-			if(array[i] < 10)
+			if(array[i]<10)
 			{
 				printf(" ");
 			}
@@ -129,7 +129,7 @@ void SelectionSort(int array[], int length, int temp)
 	for(int i=0; i<length; i++)
 	{
 		//Add an extra leading space character when displaying a single-digit number. This keeps the columns even.
-		if(array[i] < 10)
+		if(array[i]<10)
 		{
 			printf(" ");
 		}
@@ -158,7 +158,7 @@ void SelectionSort(int array[], int length, int temp)
 		for(int b=(i+1); b<length; b++)
 		{
 			//If a value is found that is lesser than the value in the current position...
-			if(array[b] < array[min])
+			if(array[b]<array[min])
 			{
 				//...save the location of that newfound minimum value.
 				min = b;
@@ -166,7 +166,7 @@ void SelectionSort(int array[], int length, int temp)
 		}
 
 		//If a smaller value was discovered further down in the array...
-		if(min != i)
+		if(min!=i)
 		{
 			//...store the value of the current position.
 			temp = array[i];
@@ -194,7 +194,7 @@ void SelectionSort(int array[], int length, int temp)
 		for(int i=0; i<length; i++)
 		{
 			//Add an extra leading space character when displaying a single-digit number. This keeps the columns even.
-			if(array[i] < 10)
+			if(array[i]<10)
 			{
 				printf(" ");
 			}
@@ -246,6 +246,7 @@ int main()
 	int array[100]; //Points To Array Locations
 	int array2[100]; //Duplicate Array for SelectionSort Method (Arrays cannot be passed by value in C.)
 	int temp; //Used to store values as we sort.
+	int clearStandardInput; //Used to clear stdin in the case of bad data entry by the user.
 	
 	//Generate Random Number Seed
 	srand(time(NULL));
@@ -257,17 +258,24 @@ int main()
 	printf("\nThis program generates a random list of numbers and then sorts\nthem using a \"bubble sort\" algorithm and a \"selection sort\" algorithm.\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\n");
 
 	//We will keep prompting the user to enter a value utill they enter a number between 2 and 99.
-	while(length<=1 || length>99)
+	while(1==1)
 	{
 		//Ask for a value.
 		printf("How many numbers would you like to sort?: ");
-		scanf("%d", &length); //User-Defined Array Length
 
-		//If the user entered an erroneous value...
-		if(length<=1 || length>99)
+		//Read the data input by the user ("scanf" will read the input and immediately check to see if it's a whole number).
+		//If the user entered an erroneous value (anything other than an integer between 2 and 99)...
+		if(scanf("%d", &length)!= 1 || length<=1 || length>99)
 		{
-			//...provide a friendly error message.
+			//...clear stdin. (This clears out the input and allows for a fresh new value to be entered.)
+			do
+			{
+				clearStandardInput = getchar();
+			} while(clearStandardInput!='\n');
+			
+			//Provide a friendly error message.
 			printf("                                          Please enter a number between 2 and 99.\n\n");
+			
 		}
 		//Otherwise...
 		else
