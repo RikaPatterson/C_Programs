@@ -7,12 +7,13 @@
 #include <stdlib.h>
 #include <time.h> //For Random Number Generation
 #include <unistd.h> //For "sleep(1);"
+#include <stdbool.h> //For boolean variables.
 
 //BubbleSort Method
 void BubbleSort(int array[], int length, int temp)
 {
 	//Variables
-	int swapOccured = 0; //Used to exit the sorting algorithm.
+	bool arraySorted = true; //Used to exit the sorting algorithm.
 	
 	//Print the unsorted array.
 	printf("\n\tUnsorted:\t");
@@ -39,6 +40,28 @@ void BubbleSort(int array[], int length, int temp)
 	//Run through every position in the array.
 	for(int i=0; i<(length-1); i++)
 	{
+		//Is the array sorted now? We'll set algorithm-exiting variable to "true" and then raise a flag if the array is found to not be sorted.
+		arraySorted = true;
+		
+		//Run through every position in the array.
+		for(int i=0; i<(length-1); i++)
+		{
+			//If the value in the current position is greater than the value proceding it...
+			if(array[i]>array[i+1])
+			{
+				//...flag the array as not currently sorted.
+				arraySorted = false;
+			}
+		}
+
+		//If the array is sorted...
+		if(arraySorted==true)
+		{
+			//...state so...
+			printf(" (Sorted!)\n");
+			//...and exit the sorting algorithm.
+			break;
+		}
 
 		//On the next line we will be displaying a graphic to depict which numbers have been moved towards the beginning of the list.
 		//Start with blank space where the row label would be.
@@ -59,9 +82,6 @@ void BubbleSort(int array[], int length, int temp)
 				//Set the value of the next position to the stored value from the current position.
 				array[i+1] = temp;
 
-				//A value swap has occured.
-				swapOccured = 1;
-
 				//Place an arrow graphic under the number which is currently being moved towards the beginning of the list.
 				printf("↵   ");
 			}
@@ -72,15 +92,6 @@ void BubbleSort(int array[], int length, int temp)
 				printf("    ");
 			}
 		}
-		
-		//If no values were swapped during this pass then the array is sorted and the sorting algorithm will be exited.
-		if(swapOccured == 0)
-		{
-			break;
-		}
-
-		//Reset the exit variable.
-		swapOccured = 0;
 		
 		//Print this round of sorting.
 		printf("\n\tPass %d Result:\t", i+1);
@@ -103,10 +114,6 @@ void BubbleSort(int array[], int length, int temp)
 			}
 		}
 	}
-
-	//The array is sorted.
-	printf(" (Sorted!)\n");
-	
 }
 //End BubbleSort Method
 
