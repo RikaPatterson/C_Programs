@@ -115,9 +115,8 @@ void BubbleSort(int array[], int length, int temp)
 		}
 	}
 }
-//End BubbleSort Method
 
-//SelectionSort method
+//SelectionSort Method
 void SelectionSort(int array[], int length, int temp)
 {
 	//Variables
@@ -235,7 +234,80 @@ void SelectionSort(int array[], int length, int temp)
 	}
 
 }
-//End SelectionSort method
+
+//InsertionSort method
+void InsertionSort(int array[], int length, int temp)
+{
+	//Print the unsorted array.
+	printf("\n\tUnsorted:\t");
+	//Run through every position in the array.
+	for(int i=0; i<length; i++)
+	{
+		//Add an extra leading space character when displaying a single-digit number. This keeps the columns even.
+		if(array[i]<10)
+		{
+			printf(" ");
+		}
+
+		//Display the number.
+		printf("%d", array[i]);
+
+		//Add a comma and space character if this isn't the last digit in the array.
+		if(i<(length-1))
+		{
+			printf(", ");
+		}
+	}
+	
+	//Insertion Sort Algorithm
+	//Run through every position in the array.
+	for(int i=1; i<=(length-1); i++)
+	{
+		//"p" represents the current position in the array that is being sorted.
+		int p = i;
+
+		//Start from the current position in the array for this pass, working backwards until reaching the beginning of the array.
+		//Comparing "array[p] < array[p-1]", if the value current position in the array is less than the value in the position behind it...
+		while(p > 0 && array[p] < array[p-1])
+		{
+			//...copy the value in the current position.
+			temp = array[p];
+
+			//Set the value in the current position to the value preceeding it in the array.
+			array[p] = array[p-1];
+
+			//Set the value of the previous position in the array to the copied value.
+			array[p-1] = temp;
+
+			//Iterate down.
+			p--;
+		}
+		
+		//Print this round of sorting.
+		printf("\n\tPass %d Result:\t", i+1);
+		//Run through every position in the array.
+		for(int i=0; i<length; i++)
+		{
+			//Add an extra leading space character when displaying a single-digit number. This keeps the columns even.
+			if(array[i]<10)
+			{
+				printf(" ");
+			}
+
+			//Display the number.
+			printf("%d", array[i]);
+
+			//Add a comma and space character if this isn't the last digit in the array.
+			if(i<(length-1))
+			{
+				printf(", ");
+			}
+		}
+	}
+
+	//The array is sorted.
+	printf(" (Sorted!)\n");
+}
 
 //Main Method
 int main()
@@ -245,6 +317,7 @@ int main()
 	int number = 0; //Stored Number Values
 	int array[100]; //Points To Array Locations
 	int array2[100]; //Duplicate Array for SelectionSort Method (Arrays cannot be passed by value in C.)
+	int array3[100]; //Duplicate Array for InsertionSort Method (Arrays cannot be passed by value in C.)
 	int temp; //Used to store values as we sort.
 	int clearStandardInput; //Used to clear stdin in the case of bad data entry by the user.
 	
@@ -293,6 +366,7 @@ int main()
 		//Assign the current location in the array to this number.
 		array[i] = number;
 		array2[i] = number;
+		array3[i] = number;
 	}
 	
 	//Print the unsorted array.
@@ -319,11 +393,13 @@ int main()
 	//Call SelectionSort Method
 	printf("\n\n\"Selection Sort\" Algorithm");
 	SelectionSort(array2, length, temp);
+	
+	//Call InsertionSort Method
+	printf("\n\n\"Selection Sort\" Algorithm");
+	InsertionSort(array3, length, temp);
 
 	printf("\n________________________________________________________________________\n\n\n");
 	
 	//Terminate Program
 	return 0;
 }
-//End Main Method
-//End Program
