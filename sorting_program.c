@@ -40,7 +40,9 @@ void BubbleSort(int array[], int length, int temp)
 	//Run through every position in the array.
 	for(int i=0; i<(length-1); i++)
 	{
-		//Is the array sorted now? We'll set algorithm-exiting variable to "true" and then raise a flag if the array is found to not be sorted.
+		//Is the array sorted now?
+		//(If it is sorted at the BEGINNING of this run through the "for-loop", then we want to catch it here so we don't print a new line where the arrow graphics would be.)
+		//We'll set algorithm-exiting variable to "true" and then raise a flag if the array is found to not be sorted.
 		arraySorted = true;
 		
 		//Run through every position in the array.
@@ -58,7 +60,7 @@ void BubbleSort(int array[], int length, int temp)
 		if(arraySorted==true)
 		{
 			//...state so...
-			printf(" (Sorted!)\n");
+			printf(" (Sorted!)");
 			//...and exit the sorting algorithm.
 			break;
 		}
@@ -112,6 +114,31 @@ void BubbleSort(int array[], int length, int temp)
 			{
 				printf(", ");
 			}
+		}
+
+		//Is the array sorted now?
+		//(If it is sorted at the END of this run through the "for-loop", then we want to catch it here so we make sure that "(Sorted!)" is printed before the loop exits.)
+		//We'll set algorithm-exiting variable to "true" and then raise a flag if the array is found to not be sorted.
+		arraySorted = true;
+		
+		//Run through every position in the array.
+		for(int i=0; i<(length-1); i++)
+		{
+			//If the value in the current position is greater than the value proceding it...
+			if(array[i]>array[i+1])
+			{
+				//...flag the array as not currently sorted.
+				arraySorted = false;
+			}
+		}
+
+		//If the array is sorted...
+		if(arraySorted==true)
+		{
+			//...state so...
+			printf(" (Sorted!)");
+			//...and exit the sorting algorithm.
+			break;
 		}
 	}
 }
@@ -284,7 +311,7 @@ void InsertionSort(int array[], int length, int temp)
 		}
 		
 		//Print this round of sorting.
-		printf("\n\tPass %d Result:\t", i+1);
+		printf("\n\tPass %d Result:\t", i);
 		//Run through every position in the array.
 		for(int i=0; i<length; i++)
 		{
@@ -395,7 +422,7 @@ int main()
 	SelectionSort(array2, length, temp);
 	
 	//Call InsertionSort Method
-	printf("\n\n\"Selection Sort\" Algorithm");
+	printf("\n\n\"Insertion Sort\" Algorithm");
 	InsertionSort(array3, length, temp);
 
 	printf("\n________________________________________________________________________\n\n\n");
